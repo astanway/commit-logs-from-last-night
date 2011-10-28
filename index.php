@@ -75,7 +75,7 @@
     font-size: 13px;
     line-height: 120%;
     width: 110px;
-    top: 300px;
+    top: 250px;
     color: gray;
     right: 109px;
     text-align: right;
@@ -114,10 +114,15 @@
 <body>
   <div id="header">Commit Logs From Last Night
     <div id="subheader">because real hackers pivot two hours before their demo</div>
-        <div id="twitter">you should follow me on <a href="http://www.twitter.com/abestanway">twitter</a></div>
+        <div id="twitter">a <a href="http://hackny.org">hackNY</a> hack by <a href="http://www.twitter.com/abestanway">@abestanway</a></div>
         <div id="githubForm">
           <form action="" method="post" >
-            Wanna be famous?
+            <?php if (isset($_POST['username'])){
+              echo "Success!";
+            } else {
+              echo "Wanna be famous?";
+            }?>
+            
             <input type="text" class="field" name="username" placeholder="GitHub Username"></input>
             <input type="submit" value="Submit">
           </form>
@@ -127,7 +132,11 @@
   <?php require('opendb.php');
   if (isset($_POST['username'])){
     $username = filter_that_shit($_POST['username']);
-    $query = mysql_query("INSERT INTO users (username) VALUES ('$username')");
+    $repo_url = "https://api.github.com/users/" . $username;
+    $repos = json_decode(file_get_contents($repo_url));
+    if ($repos != NULL){ 
+      $query = mysql_query("INSERT INTO users (username) VALUES ('$username')");
+    }
   }
   $query = mysql_query("SELECT * FROM commits ORDER BY id");
   while($row = mysql_fetch_array($query)){ ?>
