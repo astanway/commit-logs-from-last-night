@@ -138,7 +138,7 @@
       $query = mysql_query("INSERT INTO users (username) VALUES ('$username')");
     }
   }
-  $query = mysql_query("SELECT * FROM commits ORDER BY id");
+  $query = mysql_query("SELECT * FROM commits ORDER BY date DESC");
   while($row = mysql_fetch_array($query)){ ?>
       <tr class="post">
         <td>
