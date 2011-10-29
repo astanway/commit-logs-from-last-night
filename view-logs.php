@@ -33,7 +33,7 @@
          
            $connection = mysql_connect($db_ip, $db_user, $db_pass);
            mysql_select_db($db_name) or die ('Unable to select database!');
-           $insert = "INSERT INTO commits VALUES ('', '$login', '$message', '$avatar', '$commiturl', '$userurl', '$date')";
+           $insert = "INSERT INTO new_commits VALUES ('', '$login', '$message', '$avatar', '$commiturl', '$userurl', '$date')";
            $insert = mysql_query($insert);
            echo mysql_error($connection);
            mysql_close($connection);
