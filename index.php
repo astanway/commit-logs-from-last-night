@@ -7,13 +7,8 @@
   html, body{
     height: 100%;
     width: 100%;
-    overflow-x: hidden;
     padding: 0;
     margin: 0;
-  }
-  
-  body{
-    width: 98%;
   }
   
   html, body, #header{
@@ -26,7 +21,7 @@
     font-family: 'Georgia';
     margin: 0 auto;
     width: 100%;
-    position: absolute;
+    position: fixed;
     height: 160px;
     background: -webkit-gradient(linear, 0% 75%, 0% 100%, from(rgba(255,255,255,1)), to(rgba(255,255,255,0)));
     background: -moz-linear-gradient(-90deg, rgba(255,255,255,1) 70%, rgba(255,255,255,0));
@@ -138,7 +133,7 @@
       $query = mysql_query("INSERT INTO users (username) VALUES ('$username')");
     }
   }
-  $query = mysql_query("SELECT * FROM new_commits ORDER BY date DESC");
+  $query = mysql_query("SELECT * FROM commits ORDER BY date DESC");
   while($row = mysql_fetch_array($query)){ ?>
       <tr class="post">
         <td>
