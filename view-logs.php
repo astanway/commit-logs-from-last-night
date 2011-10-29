@@ -29,10 +29,9 @@
          $userurl = $commit->committer->url;
          $date = $commit->commit->committer->date;
          $commiturl = $commit->commit->url;
-         $message = filter_that_shit($message);
-         
            $connection = mysql_connect($db_ip, $db_user, $db_pass);
            mysql_select_db($db_name) or die ('Unable to select database!');
+           $message = filter_that_shit($message);
            $insert = "INSERT INTO new_commits VALUES ('', '$login', '$message', '$avatar', '$commiturl', '$userurl', '$date')";
            $insert = mysql_query($insert);
            echo mysql_error($connection);
