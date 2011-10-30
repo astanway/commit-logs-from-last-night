@@ -93,7 +93,9 @@ html, body, #header{
   width: 700px;
   margin: 0 auto;
   text-align: left;
-  padding-top: 140px;
+  position: relative;
+  z-index: -1;
+  top: 150px;
 }
 
 td{
