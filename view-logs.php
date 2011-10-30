@@ -19,9 +19,8 @@
     foreach($rBROsitories as $key=>$reBRO){
       $username = $reBRO->username;
       array_push($usernames, $username);
+    }
   }
-
-  
   
   foreach($usernames as $username){
     process($username, $db_ip, $db_user, $db_pass, $db_name);
