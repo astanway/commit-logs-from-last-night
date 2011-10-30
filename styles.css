@@ -65,6 +65,7 @@ html, body, #header{
   padding-top: 10px;
   background: -webkit-gradient(linear, 0% 75%, 0% 100%, from(rgba(255,255,255,1)), to(rgba(255,255,255,0)));
   background: -moz-linear-gradient(-90deg, rgba(255,255,255,1) 70%, rgba(255,255,255,0));
+  z-index: 2;
 }
 
 .author{
@@ -94,7 +95,7 @@ html, body, #header{
   margin: 0 auto;
   text-align: left;
   position: relative;
-  z-index: -1;
+  z-index: 1;
   top: 150px;
 }
 
