@@ -19,7 +19,11 @@
      $commit_url = "https://api.github.com/repos/" . $username . "/" . $name . "/commits";
      $commits = json_decode(file_get_contents($commit_url));
      foreach($commits as $key => $commit) {
-       $message = $commit->commit->message;
+       try{
+         $message = $commit->commit->message;  
+       } catch (Exception $e){
+         continue;
+       }
        $profanity_url = "http://www.wdyl.com/profanity?q=" . urlencode($message);
        $profanity = json_decode(file_get_contents($profanity_url));
      
