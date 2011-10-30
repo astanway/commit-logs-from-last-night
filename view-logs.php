@@ -27,15 +27,23 @@
          $login = $commit->committer->login;
          $avatar = $commit->committer->avatar_url;
          $userurl = $commit->committer->url;
+         $userurl = str_replace('api.','', $userurl);
+         $userurl = str_replace('users/', '', $userurl);
          $date = $commit->commit->committer->date;
          $commiturl = $commit->commit->url;
+         $commiturl = str_replace('api.','',$commiturl);
+         $commiturl = str_replace('repos/','',$commiturl);
+         $commiturl = str_replace('git/commits','commit',$commiturl);
            $connection = mysql_connect($db_ip, $db_user, $db_pass);
            mysql_select_db($db_name) or die ('Unable to select database!');
            $message = filter_that_shit($message);
-           $insert = "INSERT INTO new_commits VALUES ('', '$login', '$message', '$avatar', '$commiturl', '$userurl', '$date')";
-           $insert = mysql_query($insert);
-           echo mysql_error($connection);
-           mysql_close($connection);
+           try{
+             $insert = "INSERT INTO new_commits VALUES ('', '$login', '$message', '$avatar', '$commiturl', '$userurl', '$date')";
+             $insert = mysql_query($insert);             
+              mysql_close($connection);
+           } catch (Exception $e){
+             echo mysql_error($connection);
+           }
        } 
      }
     }
