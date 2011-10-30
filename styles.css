@@ -92,6 +92,7 @@ html, body, #header{
 
 .subMessage{
   width: 500px;
+  word-wrap: break-word;
 }
 
 #allPosts{
