@@ -90,6 +90,10 @@ html, body, #header{
   vertical-align: middle;
 }
 
+.subMessage{
+  width: 500px;
+}
+
 #allPosts{
   width: 700px;
   margin: 0 auto;

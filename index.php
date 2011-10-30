@@ -47,7 +47,9 @@
                  ?>
         </td>
         <td valign="middle" class="message">
+          <div class="subMessage">
                 <?php echo '<a class="commit" href='. $row['commiturl'] . '>' . $row['message'] .'</a>'?>  
+          </div>
         </td>
       </tr> 
   <?php } ?>
