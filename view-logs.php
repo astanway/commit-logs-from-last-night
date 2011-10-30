@@ -54,16 +54,14 @@ function process($username, $db_ip, $db_user, $db_pass, $db_name){
        $commiturl = str_replace('api.','',$commiturl);
        $commiturl = str_replace('repos/','',$commiturl);
        $commiturl = str_replace('git/commits','commit',$commiturl);
+
+          //hook it up
          $connection = mysql_connect($db_ip, $db_user, $db_pass);
          mysql_select_db($db_name) or die ('Unable to select database!');
          $message = filter_that_shit($message);
-         try{
-           $insert = "INSERT INTO new_commits VALUES ('', '$login', '$message', '$avatar', '$commiturl', '$userurl', '$date')";
-           $insert = mysql_query($insert);             
-            mysql_close($connection);
-         } catch (Exception $e){
-           echo mysql_error($connection);
-         }
+         $insert = "INSERT INTO new_commits VALUES ('', '$login', '$message', '$avatar', '$commiturl', '$userurl', '$date', now())";
+         $insert = mysql_query($insert);             
+         mysql_close($connection);
      } 
    }
   }  
