@@ -32,17 +32,22 @@
       $query = mysql_query("INSERT INTO users (username) VALUES ('$username')");
     }
   }
-  $query = mysql_query("SELECT * FROM commits ORDER BY date DESC");
+  $query = mysql_query("SELECT * FROM new_commits ORDER BY date DESC");
   while($row = mysql_fetch_array($query)){ ?>
       <tr class="post">
         <td>
-          <img height="70px" src="<?php echo$row['url'];?>"/>
+        <?php echo '<a class="avatarlink" href='. $row['userurl'] . '>'?>
+          <img class="avatar" height="70px" src="<?php echo$row['url'];?>"/>
+          </a>
         </td>
         <td valign="middle" class="author">
-                <?php echo '<a href='. $row['userurl'] . '>' . $row['commiter'] .'</a>'?>  
+                <?php $datetime = strtotime($row['date']);
+                      $mysqldate = date("m/d/y g:i A", $datetime);
+                      echo "<span class='date'>". $mysqldate . "</span>";
+                 ?>
         </td>
         <td valign="middle" class="message">
-            <?php echo$row['message'];?>
+                <?php echo '<a class="commit" href='. $row['commiturl'] . '>' . $row['message'] .'</a>'?>  
         </td>
       </tr> 
   <?php } ?>
