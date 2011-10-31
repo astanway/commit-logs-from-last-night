@@ -22,6 +22,9 @@
     }
   }
   
+  //an attempt to get all the data over time despite github's rate limiting.
+  shuffle($usernames);
+  
   foreach($usernames as $username){
     process($username, $db_ip, $db_user, $db_pass, $db_name);
   }
