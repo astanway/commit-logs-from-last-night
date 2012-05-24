@@ -1,7 +1,7 @@
 import httplib2
 import pprint
 import sys
-from bs4 import BeautifulSoup
+from BeautifulSoup import BeautifulSoup
 import requests
 import simplejson
 
@@ -17,8 +17,6 @@ def find_avatar(username):
         return img.get('src')
     except:
       continue
-
-print find_avatar('astanway')
 
 def printTableData(data, startIndex):
   for row in data['rows']:
@@ -51,7 +49,7 @@ def main(argv):
   def runSyncQuery (service, projectId, datasetId, timeout=0):
     jobCollection = service.jobs()
     queryData = {'query':
-    """SELECT created_at, url, DISTINCT payload_commit_msg, actor FROM [githubarchive:github.timeline] 
+    """SELECT created_at, url, payload_commit_msg, actor FROM [githubarchive:github.timeline] 
     WHERE 
     (LOWER(payload_commit_msg) CONTAINS "fuck") OR  
     (LOWER(payload_commit_msg) CONTAINS "bitch") OR
