@@ -1,5 +1,7 @@
 opendb.php
 key.p12
+dbauth.py
+dbauth.pyc
 
 # OS X Specific
 .DS_Store
