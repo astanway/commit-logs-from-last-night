@@ -29,9 +29,7 @@ def printTableData(data, startIndex):
         rowVal.append(cell['v'])
     avatar = find_avatar(row['f'][3]['v'])
     userurl = "https://github.com/" + row['f'][3]['v']
-    print 'Row %d: %s' % (startIndex, rowVal)
     query = "INSERT INTO new_commits VALUES ('', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', '')" % (row['f'][3]['v'], row['f'][2]['v'], avatar, row['f'][1]['v'], userurl, row['f'][0]['v'])
-    print query
     try:
       cursor.execute(query)
     except:
@@ -40,7 +38,7 @@ def printTableData(data, startIndex):
 
 
 def main(argv):
-  f = file('key.p12', 'rb')
+  f = file('/home/abasababa/webapps/commit/key.p12', 'rb')
   key = f.read()
   f.close()
 
