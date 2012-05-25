@@ -34,23 +34,24 @@ if($next_page > $num_pages){
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Commit Logs From Last Night</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Marvel:700italic' rel='stylesheet' type='text/css'>
   <link href='styles.css' rel='stylesheet' type='text/css'>
   <script type="text/javascript" src="jquery.infinitescroll.min.js"></script>
-	<script type="text/javascript">
-	$(document).ready(function(){
-  $('#allPosts').infinitescroll({
-      navSelector  : "div.pagination",            
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('#allPosts').infinitescroll({
+        navSelector  : "div.pagination",            
                      // selector for the paged navigation (it will be hidden)
-      nextSelector : "div.pagination a:first",    
+        nextSelector : "div.pagination a:first",    
                      // selector for the NEXT link (to page 2)
-      itemSelector : "#allPosts tr.post"          
+        itemSelector : "#allPosts tr.post"          
                      // selector for all items you'll retrieve
     });
-	});
-	</script>
+  });
+  </script>
 </head>
 <body>
   <div id="header">Commit Logs From Last Night
