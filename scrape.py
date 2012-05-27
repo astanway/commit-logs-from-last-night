@@ -4,9 +4,14 @@ import sys
 from BeautifulSoup import BeautifulSoup
 import requests
 import simplejson
+from twitter_auth import token, token_secret, consumer, consumer_secret
+from twitter import Twitter, OAuth 
 
 from apiclient.discovery import build
 from oauth2client.client import SignedJwtAssertionCredentials
+
+t = Twitter(
+    auth=OAuth(token, token_secret, consumer, consumer_secret)))
 
 def find_avatar(username):
   r = requests.get('https://github.com/' + username)
@@ -24,8 +29,6 @@ def printTableData(data, startIndex):
     for cell in row['f']:
         rowVal.append(cell['v'])
     avatar = find_avatar(row['f'][3]['v'])
-    print avatar
-    print 'Row %d: %s' % (startIndex, rowVal)
     startIndex +=1
 
 
@@ -74,7 +77,7 @@ def main(argv):
     (LOWER(payload_commit_msg) CONTAINS "penis") OR
     (LOWER(payload_commit_msg) CONTAINS "vagina") OR
     (LOWER(payload_commit_msg) CONTAINS "whore")
-    ORDER BY created_at DESC LIMIT 500;""",
+    ORDER BY created_at DESC LIMIT 700;""",
                  'timeoutMs':timeout}
 
     queryReply = jobCollection.query(projectId=projectId,
