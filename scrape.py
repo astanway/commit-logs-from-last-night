@@ -15,7 +15,27 @@ from oauth2client.client import SignedJwtAssertionCredentials
 
 cursor = dbauth.db.cursor()
 t = Twitter(
-    auth=OAuth(token, token_secret, consumer, consumer_secret)))
+    auth=OAuth(token, token_secret, consumer, consumer_secret))
+
+def insult(name):
+  person = '@' + name
+  i = ['Watch your mouth, ' + person, 
+       person + ', I love it when you talk dirty', 
+       'Very disappointed with your language,' + person, 
+       'Yo,' + person + ', quit cursing in your code!',
+       person + ', you should be ashamed for using this kind of language.',
+       person + ', you kiss your mother with that mouth?',
+       'Should made this a private repo, ' + person,
+       'Hope your manager doesn\'t see this, ' + person + '!',
+       person.upper() + ' CURSES IN HIS !@*^ING CODE',
+       person + ' Dude, act professional',
+       'Impressive vocabulary, ' + person,
+       person + ', what would Linus say?',
+       person + ', who do you think you are, Gordon Ramsey?'
+       'Stop fucking cursing' + person,
+       ]
+
+  return random.choice(i)
 
 def find_avatar(username):
   r = urllib2.urlopen('https://github.com/' + username)
@@ -33,13 +53,18 @@ def printTableData(data, startIndex):
     rowVal = []
     for cell in row['f']:
         rowVal.append(cell['v'])
+    #Some random fucking german dude whose shit always shows up.
+    if row['f'][3]['v'] == 'yayachiken':
+        continue
     avatar = find_avatar(row['f'][3]['v'])
     userurl = "https://github.com/" + row['f'][3]['v']
     query = "INSERT INTO new_commits VALUES ('', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', '')" % (row['f'][3]['v'], row['f'][2]['v'], avatar, row['f'][1]['v'], userurl, row['f'][0]['v'])
     try:
       cursor.execute(query)
+      print "Tweeting"
       """Sleep a random amount of time to avoid spam tag and tweet"""
-      t.status.update("Watch your mouth, @" + row['f'][3]['v'] + "! " + row['f'][1]['v'])
+      tweet = insult(row['f'][3]['v']) + " " + row['f'][1]['v']
+      t.statuses.update(status=tweet)
       sleep(random.randrange(10000, 20000, 1))
     except:
       pass
@@ -47,7 +72,7 @@ def printTableData(data, startIndex):
 
 
 def main(argv):
-  f = file('/home/abasababa/webapps/commit/key.p12', 'rb')
+  f = file('/home/abasababa/key.p12', 'rb')
   key = f.read()
   f.close()
 
