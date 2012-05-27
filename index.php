@@ -54,6 +54,7 @@ if($next_page > $num_pages){
   </script>
 </head>
 <body>
+<a href="https://github.com/astanway/Commit-Logs-From-Last-Night"><img style="position: absolute; top: 0; left: 0; border: 0; z-index:10;" src="forkme_light_background.png" alt="Fuckin' fork me!"></a>
   <div id="header">Commit Logs From Last Night
     <div id="subheader">because real hackers pivot two hours before their demo</div>
         <div id="twitter">a <a href="http://hackny.org">hackNY</a> hack by <a href="http://www.twitter.com/abestanway">@abestanway</a></div>
