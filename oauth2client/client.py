@@ -34,13 +34,10 @@ import urlparse
 from anyjson import simplejson
 
 HAS_OPENSSL = False
-try:
-  from oauth2client.crypt import Signer
-  from oauth2client.crypt import make_signed_jwt
-  from oauth2client.crypt import verify_signed_jwt_with_certs
-  HAS_OPENSSL = True
-except ImportError:
-  pass
+from oauth2client.crypt import Signer
+from oauth2client.crypt import make_signed_jwt
+from oauth2client.crypt import verify_signed_jwt_with_certs
+HAS_OPENSSL = True
 
 try:
   from urlparse import parse_qsl

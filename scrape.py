@@ -1,11 +1,14 @@
 import httplib2
 import pprint
 import sys
-from BeautifulSoup import BeautifulSoup
-import requests
+from bs4 import BeautifulSoup
+import urllib2
 import simplejson
 from twitter_auth import token, token_secret, consumer, consumer_secret
 from twitter import Twitter, OAuth 
+import MySQLdb
+import dbauth
+cursor = dbauth.db.cursor()
 
 from apiclient.discovery import build
 from oauth2client.client import SignedJwtAssertionCredentials
@@ -14,8 +17,9 @@ t = Twitter(
     auth=OAuth(token, token_secret, consumer, consumer_secret)))
 
 def find_avatar(username):
-  r = requests.get('https://github.com/' + username)
-  soup = BeautifulSoup(r.text)
+  r = urllib2.urlopen('https://github.com/' + username)
+  body = r.read()
+  soup = BeautifulSoup(body)
   for img in soup.find_all("img"):
     try:
       if img.get('src').index('gravatar') > 0:
@@ -29,11 +33,17 @@ def printTableData(data, startIndex):
     for cell in row['f']:
         rowVal.append(cell['v'])
     avatar = find_avatar(row['f'][3]['v'])
+    userurl = "https://github.com/" + row['f'][3]['v']
+    query = "INSERT INTO new_commits VALUES ('', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', '')" % (row['f'][3]['v'], row['f'][2]['v'], avatar, row['f'][1]['v'], userurl, row['f'][0]['v'])
+    try:
+      cursor.execute(query)
+    except:
+      pass
     startIndex +=1
 
 
 def main(argv):
-  f = file('key.p12', 'rb')
+  f = file('/home/abasababa/webapps/commit/key.p12', 'rb')
   key = f.read()
   f.close()
 
