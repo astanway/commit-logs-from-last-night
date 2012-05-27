@@ -1,18 +1,19 @@
 import httplib2
 import pprint
 import sys
-from bs4 import BeautifulSoup
 import urllib2
 import simplejson
-from twitter_auth import token, token_secret, consumer, consumer_secret
-from twitter import Twitter, OAuth 
 import MySQLdb
 import dbauth
-cursor = dbauth.db.cursor()
-
+import random
+from time import sleep
+from bs4 import BeautifulSoup
+from twitter_auth import token, token_secret, consumer, consumer_secret
+from twitter import Twitter, OAuth
 from apiclient.discovery import build
 from oauth2client.client import SignedJwtAssertionCredentials
 
+cursor = dbauth.db.cursor()
 t = Twitter(
     auth=OAuth(token, token_secret, consumer, consumer_secret)))
 
@@ -37,6 +38,9 @@ def printTableData(data, startIndex):
     query = "INSERT INTO new_commits VALUES ('', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', '')" % (row['f'][3]['v'], row['f'][2]['v'], avatar, row['f'][1]['v'], userurl, row['f'][0]['v'])
     try:
       cursor.execute(query)
+      """Sleep a random amount of time to avoid spam tag and tweet"""
+      t.status.update("Watch your mouth, @" + row['f'][3]['v'] + "! " + row['f'][1]['v'])
+      sleep(random.randrange(10000, 20000, 1))
     except:
       pass
     startIndex +=1
