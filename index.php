@@ -57,20 +57,11 @@ if($next_page > $num_pages){
 <a href="https://github.com/astanway/Commit-Logs-From-Last-Night"><img style="position: absolute; top: 0; left: 0; border: 0; z-index:10;" src="forkme_light_background.png" alt="Fuckin' fork me!"></a>
   <div id="header">Commit Logs From Last Night
     <div id="subheader">because real hackers pivot two hours before their demo</div>
-        <div id="twitter">a <a href="http://hackny.org">hackNY</a> hack by <a href="http://www.twitter.com/abestanway">@abestanway</a></div>
-        <div id="githubForm">
-          <form action="" method="post" >
-            <?php if (isset($_POST['username'])){
-              echo "Success!";
-            } else {
-              echo "Wanna be famous?";
-            }?>
-            
-            <input type="text" class="field" name="username" placeholder="GitHub Username"></input>
-            <input type="submit" value="Submit">
-          </form>
-        </div>
-    </div>
+        <div id="twitter">This thing tweets at <a href="http://www.twitter.com/CLFLN">@CLFLN</a>
+<br><br>
+Created by <a href="http://www.twitter.com/abestanway">@abestanway</a>
+</div>
+   </div>
 
   <table class="allPostsClass" id="allPosts" cellspacing="0" cellpadding='15'>
     <tbody>
@@ -83,7 +74,6 @@ if($next_page > $num_pages){
       $query = mysql_query("INSERT INTO users (username) VALUES ('$username')");
     }
   }
-  // $query = mysql_query("SELECT * FROM new_commits ORDER BY date DESC");
   while($row = mysql_fetch_array($result)){ ?>
       <tr class="post">
         <td>

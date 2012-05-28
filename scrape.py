@@ -65,7 +65,7 @@ def printTableData(data, startIndex):
       """Sleep a random amount of time to avoid spam tag and tweet"""
       tweet = insult(row['f'][3]['v']) + " " + row['f'][1]['v']
       t.statuses.update(status=tweet)
-      sleep(random.randrange(10000, 20000, 1))
+      sleep(random.randrange(100000, 200000, 1))
     except:
       pass
     startIndex +=1
