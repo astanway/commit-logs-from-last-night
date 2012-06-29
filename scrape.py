@@ -6,6 +6,7 @@ import simplejson
 import MySQLdb
 import dbauth
 import random
+import requests
 from time import sleep
 from bs4 import BeautifulSoup
 from twitter_auth import token, token_secret, consumer, consumer_secret
@@ -20,19 +21,16 @@ t = Twitter(
 def insult(name):
   person = '@' + name
   i = ['Watch your mouth, ' + person, 
-       person + ', I love it when you talk dirty', 
-       'Very disappointed with your language,' + person, 
-       'Yo,' + person + ', quit cursing in your code!',
+       person + ' , I love it when you talk dirty', 
+       'Very disappointed with your language, ' + person, 
+       'Yo,' + person + ' , quit cursing in your code!',
        person + ', you should be ashamed for using this kind of language.',
        person + ', you kiss your mother with that mouth?',
-       'Should made this a private repo, ' + person,
-       'Hope your manager doesn\'t see this, ' + person + '!',
        person.upper() + ' CURSES IN HIS !@*^ING CODE',
-       person + ' Dude, act professional',
+       person + ', act professional and quit using bad words. Fucker.',
        'Impressive vocabulary, ' + person,
-       person + ', what would Linus say?',
-       person + ', who do you think you are, Gordon Ramsey?'
-       'Stop fucking cursing' + person,
+       person + ', fucking cursing in your code and shit.',
+       'Hope your manager doesn\'t see this, ' + person + '!'
        ]
 
   return random.choice(i)
@@ -54,19 +52,25 @@ def printTableData(data, startIndex):
     for cell in row['f']:
         rowVal.append(cell['v'])
     #Some random fucking german dude whose shit always shows up.
-    if row['f'][3]['v'] == 'yayachiken':
+    if row['f'][3]['v'] == 'yayachiken' or row['f'][3]['v'] == 'harshitagg':
         continue
     avatar = find_avatar(row['f'][3]['v'])
     userurl = "https://github.com/" + row['f'][3]['v']
     query = "INSERT INTO new_commits VALUES ('', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', '')" % (row['f'][3]['v'], row['f'][2]['v'], avatar, row['f'][1]['v'], userurl, row['f'][0]['v'])
     try:
       cursor.execute(query)
-      print "Tweeting"
-      """Sleep a random amount of time to avoid spam tag and tweet"""
-      tweet = insult(row['f'][3]['v']) + " " + row['f'][1]['v']
-      t.statuses.update(status=tweet)
-      sleep(random.randrange(100000, 200000, 1))
+      if startIndex % 30 == 0:
+        print "Tweeting"
+        """Sleep a random amount of time to avoid spam tag and tweet"""
+        tweet = insult(row['f'][3]['v']) + " " + row['f'][1]['v']
+        url = "http://api.twitter.com/1/users/show.xml?screen_name=" + row(['f'][3]['v']
+	r = requests.get(url)
+        if(r.status_code == 200){
+            t.statuses.update(status=tweet)
+            sleep(random.randrange(20, 60, 1))
+        }
     except:
+      print Exception
       pass
     startIndex +=1
 
