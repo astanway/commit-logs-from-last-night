@@ -98,7 +98,6 @@ def main(argv):
     (LOWER(payload_commit_msg) CONTAINS "shit") OR
     (LOWER(payload_commit_msg) CONTAINS " tits") OR
     (LOWER(payload_commit_msg) CONTAINS "asshole") OR
-    (LOWER(payload_commit_msg) CONTAINS "dick") OR
     (LOWER(payload_commit_msg) CONTAINS "cocksucker") OR
     (LOWER(payload_commit_msg) CONTAINS "cunt") OR
     (LOWER(payload_commit_msg) CONTAINS " hell ") OR
