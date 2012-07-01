@@ -63,12 +63,11 @@ def printTableData(data, startIndex):
         print "Tweeting"
         """Sleep a random amount of time to avoid spam tag and tweet"""
         tweet = insult(row['f'][3]['v']) + " " + row['f'][1]['v']
-        url = "http://api.twitter.com/1/users/show.xml?screen_name=" + row(['f'][3]['v']
-	r = requests.get(url)
-        if(r.status_code == 200){
+        url = "http://api.twitter.com/1/users/show.xml?screen_name=" + row(['f'][3]['v'])
+        r = requests.get(url)
+        if r.status_code == 200:
             t.statuses.update(status=tweet)
             sleep(random.randrange(20, 60, 1))
-        }
     except:
       print Exception
       pass
