@@ -56,20 +56,21 @@ def printTableData(data, startIndex):
         continue
     avatar = find_avatar(row['f'][3]['v'])
     userurl = "https://github.com/" + row['f'][3]['v']
-    query = "INSERT INTO new_commits VALUES ('', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', '')" % (row['f'][3]['v'], row['f'][2]['v'], avatar, row['f'][1]['v'], userurl, row['f'][0]['v'])
+    query = "INSERT INTO new_commits VALUES ('', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', '')" % (row['f'][3]['v'], dbauth.db.escape_string(row['f'][2]['v']), avatar, row['f'][1]['v'], userurl, row['f'][0]['v'])
     try:
       cursor.execute(query)
-      if startIndex % 30 == 0:
-        print "Tweeting"
+      if startIndex % 35 == 0:
         """Sleep a random amount of time to avoid spam tag and tweet"""
         tweet = insult(row['f'][3]['v']) + " " + row['f'][1]['v']
-        url = "http://api.twitter.com/1/users/show.xml?screen_name=" + row(['f'][3]['v'])
+        url = "http://api.twitter.com/1/users/show.xml?screen_name=" + row['f'][3]['v']
         r = requests.get(url)
+        print r.status_code
         if r.status_code == 200:
+            print "Tweeting"
             t.statuses.update(status=tweet)
             sleep(random.randrange(20, 60, 1))
-    except:
-      print Exception
+    except MySQLdb.Error, e:
+      print str(e)
       pass
     startIndex +=1
 
