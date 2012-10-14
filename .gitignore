@@ -1,11 +1,6 @@
 opendb.php
 key.p12
-<<<<<<< HEAD
 twitter_auth.py
-=======
 dbauth.py
 dbauth.pyc
->>>>>>> 481332875ceb31b7b690c35e967e456ba07cc0ae
-
-# OS X Specific
 .DS_Store
