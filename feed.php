@@ -1,5 +1,5 @@
 <?php
-    header("Content-Type: application/rss+xml; charset=ISO-8859-1");
+    header("Content-Type: application/rss+xml; charset=UTF-8");
  
     require('opendb.php');
     $feed_items = 20;
