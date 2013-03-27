@@ -118,6 +118,15 @@ def main(argv):
     (LOWER(payload_commit_msg) CONTAINS "prick") OR
     (LOWER(payload_commit_msg) CONTAINS "penis") OR
     (LOWER(payload_commit_msg) CONTAINS "vagina") OR
+
+	//Kaushal's fucking  curse words.
+	(LOWER(payload_commit_msg) CONTAINS "anus") OR
+    (LOWER(payload_commit_msg) CONTAINS "blowjob") OR
+    (LOWER(payload_commit_msg) CONTAINS "ass") OR
+    (LOWER(payload_commit_msg) CONTAINS "cockfucker") OR
+    (LOWER(payload_commit_msg) CONTAINS "homo") OR
+    (LOWER(payload_commit_msg) CONTAINS "prick") OR
+
     (LOWER(payload_commit_msg) CONTAINS "whore")
     ORDER BY created_at DESC LIMIT 700;""",
                  'timeoutMs':timeout}
