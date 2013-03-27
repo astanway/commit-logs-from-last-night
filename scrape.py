@@ -119,7 +119,7 @@ def main(argv):
     (LOWER(payload_commit_msg) CONTAINS "penis") OR
     (LOWER(payload_commit_msg) CONTAINS "vagina") OR
 
-
+	//Kaushal's fucking  curse words.
 	(LOWER(payload_commit_msg) CONTAINS "anus") OR
     (LOWER(payload_commit_msg) CONTAINS "blowjob") OR
     (LOWER(payload_commit_msg) CONTAINS "ass") OR
