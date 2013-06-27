@@ -95,30 +95,30 @@ def main(argv):
   def runSyncQuery (service, projectId, datasetId, timeout=0):
     jobCollection = service.jobs()
     queryData = {'query':
-    """SELECT created_at, url, payload_commit_msg, actor FROM [githubarchive:github.timeline] 
-    WHERE 
-    (LOWER(payload_commit_msg) CONTAINS "fuck") OR  
-    (LOWER(payload_commit_msg) CONTAINS "bitch") OR
-    (LOWER(payload_commit_msg) CONTAINS "shit") OR
-    (LOWER(payload_commit_msg) CONTAINS " tits") OR
-    (LOWER(payload_commit_msg) CONTAINS "asshole") OR
-    (LOWER(payload_commit_msg) CONTAINS "cocksucker") OR
-    (LOWER(payload_commit_msg) CONTAINS "cunt") OR
-    (LOWER(payload_commit_msg) CONTAINS " hell ") OR
-    (LOWER(payload_commit_msg) CONTAINS "douche") OR
-    (LOWER(payload_commit_msg) CONTAINS "testicle") OR
-    (LOWER(payload_commit_msg) CONTAINS "twat") OR
-    (LOWER(payload_commit_msg) CONTAINS "bastard") OR
-    (LOWER(payload_commit_msg) CONTAINS "faggot") OR
-    (LOWER(payload_commit_msg) CONTAINS "nigger") OR
-    (LOWER(payload_commit_msg) CONTAINS "sperm") OR
-    (LOWER(payload_commit_msg) CONTAINS "shit") OR
-    (LOWER(payload_commit_msg) CONTAINS "dildo") OR
-    (LOWER(payload_commit_msg) CONTAINS "wanker") OR
-    (LOWER(payload_commit_msg) CONTAINS "prick") OR
-    (LOWER(payload_commit_msg) CONTAINS "penis") OR
-    (LOWER(payload_commit_msg) CONTAINS "vagina") OR
-    (LOWER(payload_commit_msg) CONTAINS "whore")
+    """SELECT created_at, url, payload_commit_msg, actor FROM [githubarchive:github.timeline]
+    WHERE
+      (LOWER(payload_commit_msg) CONTAINS "asshole") OR
+      (LOWER(payload_commit_msg) CONTAINS "bastard") OR
+      (LOWER(payload_commit_msg) CONTAINS "bitch") OR
+      (LOWER(payload_commit_msg) CONTAINS "cocksucker") OR
+      (LOWER(payload_commit_msg) CONTAINS "cunt") OR
+      (LOWER(payload_commit_msg) CONTAINS "dildo") OR
+      (LOWER(payload_commit_msg) CONTAINS "douche") OR
+      (LOWER(payload_commit_msg) CONTAINS "faggot") OR
+      (LOWER(payload_commit_msg) CONTAINS "fuck") OR
+      (LOWER(payload_commit_msg) CONTAINS " hell ") OR
+      (LOWER(payload_commit_msg) CONTAINS "nigger") OR
+      (LOWER(payload_commit_msg) CONTAINS "penis") OR
+      (LOWER(payload_commit_msg) CONTAINS "prick") OR
+      (LOWER(payload_commit_msg) CONTAINS "shit") OR
+      (LOWER(payload_commit_msg) CONTAINS "shit") OR
+      (LOWER(payload_commit_msg) CONTAINS "sperm") OR
+      (LOWER(payload_commit_msg) CONTAINS "testicle") OR
+      (LOWER(payload_commit_msg) CONTAINS " tits") OR
+      (LOWER(payload_commit_msg) CONTAINS "twat") OR
+      (LOWER(payload_commit_msg) CONTAINS "vagina") OR
+      (LOWER(payload_commit_msg) CONTAINS "wanker") OR
+      (LOWER(payload_commit_msg) CONTAINS "whore")
     ORDER BY created_at DESC LIMIT 700;""",
                  'timeoutMs':timeout}
 
