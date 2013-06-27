@@ -98,6 +98,7 @@ def main(argv):
     """SELECT created_at, url, payload_commit_msg, actor FROM [githubarchive:github.timeline]
     WHERE
       (LOWER(payload_commit_msg) CONTAINS "asshole") OR
+      (LOWER(payload_commit_msg) CONTAINS "arsehole") OR
       (LOWER(payload_commit_msg) CONTAINS "bastard") OR
       (LOWER(payload_commit_msg) CONTAINS "bitch") OR
       (LOWER(payload_commit_msg) CONTAINS "cocksucker") OR
