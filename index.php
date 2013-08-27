@@ -61,7 +61,7 @@ if($next_page > $num_pages){
 <br><br>
 Created by <a href="http://www.twitter.com/abestanway">@abestanway</a>
 </br></br>
-Watch the <a href="http://bit.ly/16JfbPY">video</a>!
+Watch the <a href="http://bit.ly/19XjyNb">video</a>!
 </div>
    </div>
 
