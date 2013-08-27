@@ -21,9 +21,9 @@ t = Twitter(
 def insult(name):
   person = '@' + name
   i = ['Watch your mouth, ' + person, 
-       person + ' , I love it when you talk dirty', 
+       person + ', I love it when you talk dirty', 
        'Very disappointed with your language, ' + person, 
-       'Yo,' + person + ' , quit cursing in your code!',
+       'Yo,' + person + ', quit cursing in your code!',
        person + ', you should be ashamed for using this kind of language.',
        person + ', you kiss your mother with that mouth?',
        person.upper() + ' CURSES IN HIS !@*^ING CODE',
