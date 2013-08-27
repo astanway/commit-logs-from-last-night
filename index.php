@@ -60,6 +60,8 @@ if($next_page > $num_pages){
         <div id="twitter">This thing tweets at <a href="http://www.twitter.com/CLFLN">@CLFLN</a>
 <br><br>
 Created by <a href="http://www.twitter.com/abestanway">@abestanway</a>
+</br></br>
+Watch the <a href="http://bit.ly/16JfbPY">video</a>!
 </div>
    </div>
 
