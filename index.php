@@ -54,7 +54,7 @@ if($next_page > $num_pages){
   </script>
 </head>
 <body>
-<a href="https://github.com/astanway/Commit-Logs-From-Last-Night"><img style="position: fixed; top: 0; left: 0; border: 0; z-index:10;" src="forkme_light_background.png" alt="Fuckin' fork me!"></a>
+<!--<a href="https://github.com/astanway/Commit-Logs-From-Last-Night"><img style="position: fixed; top: 0; left: 0; border: 0; z-index:10;" src="forkme_light_background.png" alt="Fuckin' fork me!"></a>-->
   <div id="header">Commit Logs From Last Night
     <div id="subheader">because real hackers pivot two hours before their demo</div>
         <div id="twitter">This thing tweets at <a href="http://www.twitter.com/CLFLN">@CLFLN</a>
@@ -76,7 +76,9 @@ Watch the <a href="http://bit.ly/19XjyNb">video</a>!
       $query = mysql_query("INSERT INTO users (username) VALUES ('$username')");
     }
   }
-  while($row = mysql_fetch_array($result)){ ?>
+  while($row = mysql_fetch_array($result)){ 
+    if (strlen($row['message']) > 70) continue;
+  ?>
       <tr class="post">
         <td>
         <?php echo '<a class="avatarlink" href='. $row['userurl'] . '>'?>
@@ -91,7 +93,7 @@ Watch the <a href="http://bit.ly/19XjyNb">video</a>!
         </td>
         <td valign="middle" class="message">
           <div class="subMessage">
-                <?php echo '<a class="commit" href='. $row['commiturl'] . '>' . $row['message'] .'</a>'?>  
+                <?php echo '<a class="commit" target="_blank" href='. $row['commiturl'] . '>' . $row['message'] .'</a>'?>  
           </div>
         </td>
       </tr> 
