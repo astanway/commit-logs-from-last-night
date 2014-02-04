@@ -39,6 +39,7 @@ if($next_page > $num_pages){
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Marvel:700italic' rel='stylesheet' type='text/css'>
   <link href='styles.css' rel='stylesheet' type='text/css'>
+  <link rel="alternate" type="application/rss+xml" href="/feed.php" title="Commit Logs From Last Night - RSS Feed">
   <script type="text/javascript" src="jquery.infinitescroll.min.js"></script>
   <script type="text/javascript">
     $(document).ready(function(){
