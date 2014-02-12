@@ -99,7 +99,7 @@ def main(argv):
     WHERE 
     (LOWER(payload_commit_msg) CONTAINS "fuck") OR  
     (LOWER(payload_commit_msg) CONTAINS "bitch") OR
-    (LOWER(payload_commit_msg) CONTAINS "shit") OR
+    (LOWER(payload_commit_msg) CONTAINS "stupid") OR
     (LOWER(payload_commit_msg) CONTAINS " tits") OR
     (LOWER(payload_commit_msg) CONTAINS "asshole") OR
     (LOWER(payload_commit_msg) CONTAINS "cocksucker") OR
