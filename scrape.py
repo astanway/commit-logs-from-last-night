@@ -109,8 +109,6 @@ def main(argv):
     (LOWER(payload_commit_msg) CONTAINS "testicle") OR
     (LOWER(payload_commit_msg) CONTAINS "twat") OR
     (LOWER(payload_commit_msg) CONTAINS "bastard") OR
-    (LOWER(payload_commit_msg) CONTAINS "faggot") OR
-    (LOWER(payload_commit_msg) CONTAINS "nigger") OR
     (LOWER(payload_commit_msg) CONTAINS "sperm") OR
     (LOWER(payload_commit_msg) CONTAINS "shit") OR
     (LOWER(payload_commit_msg) CONTAINS "dildo") OR
@@ -119,7 +117,7 @@ def main(argv):
     (LOWER(payload_commit_msg) CONTAINS "penis") OR
     (LOWER(payload_commit_msg) CONTAINS "vagina") OR
     (LOWER(payload_commit_msg) CONTAINS "whore")
-    ORDER BY created_at DESC LIMIT 700;""",
+    ORDER BY created_at DESC LIMIT 200;""",
                  'timeoutMs':timeout}
 
     queryReply = jobCollection.query(projectId=projectId,
