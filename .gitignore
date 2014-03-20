@@ -4,3 +4,4 @@ twitter_auth.py
 dbauth.py
 dbauth.pyc
 .DS_Store
+*.pyc
