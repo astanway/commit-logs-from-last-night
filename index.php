@@ -68,14 +68,6 @@ Watch the <a href="http://bit.ly/19XjyNb">video</a>!
   <table class="allPostsClass" id="allPosts" cellspacing="0" cellpadding='15'>
     <tbody>
   <?php
-  if (isset($_POST['username'])){
-    $username = filter_that_shit($_POST['username']);
-    $repo_url = "https://api.github.com/users/" . $username;
-    $repos = json_decode(file_get_contents($repo_url));
-    if ($repos != NULL){ 
-      $query = mysql_query("INSERT INTO users (username) VALUES ('$username')");
-    }
-  }
   while($row = mysql_fetch_array($result)){ 
     if (strlen($row['message']) > 70) continue;
   ?>

@@ -59,7 +59,8 @@ def process(output):
         created_at = dateutil.parser.parse(row['created_at']).strftime('%Y-%m-%d %H:%M:%S')
         query = "INSERT INTO new_commits VALUES ('', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', '')" % (row['commiter'], dbauth.db.escape_string(row['message']), avatar, row['commiturl'], userurl, created_at)
         cursor.execute(query)
-    except:
+    except Exception as e:
+        print e
         continue
 
 process(output)
