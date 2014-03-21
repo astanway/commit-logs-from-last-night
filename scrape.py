@@ -56,8 +56,8 @@ def process(output):
     try:
         userurl = "https://" + row['userurl']
         avatar = find_avatar(userurl)
-        created_at = dateutil.parser.parse(row['created_at']).strftime('%Y-%m-%d %H:%M:%S')
-        query = "INSERT INTO new_commits VALUES ('', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', '')" % (row['commiter'], dbauth.db.escape_string(row['message']), avatar, row['commiturl'], userurl, created_at)
+        created_at = dbauth.db.escape_string(dateutil.parser.parse(row['created_at']).strftime('%Y-%m-%d %H:%M:%S'))
+        query = "INSERT INTO new_commits VALUES ('', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', '')" % (row['commiter'], dbauth.db.escape_string(row['message']), avatar, dbauth.db.escape_string(row['commiturl']), dbauth.db.escape_string(userurl), created_at)
         cursor.execute(query)
     except Exception as e:
         print e
