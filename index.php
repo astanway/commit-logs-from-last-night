@@ -39,6 +39,7 @@ if($next_page > $num_pages){
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Marvel:700italic' rel='stylesheet' type='text/css'>
   <link href='styles.css' rel='stylesheet' type='text/css'>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <script type="text/javascript" src="jquery.infinitescroll.min.js"></script>
   <script type="text/javascript">
     $(document).ready(function(){
@@ -62,6 +63,8 @@ if($next_page > $num_pages){
 Created by <a href="http://www.twitter.com/abestanway">@abestanway</a>
 </br></br>
 Watch the <a href="http://bit.ly/19XjyNb">video</a>!
+<br><br>
+<a href="http://hired.com/?utm_source=partner&utm_medium=abes"><img src="hired.png"></a>
 </div>
    </div>
 
@@ -109,5 +112,25 @@ Watch the <a href="http://bit.ly/19XjyNb">video</a>!
   ga('send', 'pageview');
 
 </script>
+
+<!-- Google Code for Remarketing Tag -->
+<!--------------------------------------------------
+Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+--------------------------------------------------->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 1000219892;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1000219892/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
 </body>
 </html>
