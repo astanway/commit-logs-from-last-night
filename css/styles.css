@@ -1,0 +1,177 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+html, body{
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+html, body, #header{
+  min-width: 1160px;
+}
+
+#header{
+  font-size: 80px;
+  text-align: center;
+  font-family: 'Georgia';
+  margin: 0 auto;
+  width: 100%;
+  position: fixed;
+  height: 160px;
+  padding-top: 10px;
+  background: -webkit-gradient(linear, 0% 75%, 0% 100%, from(rgba(255,255,255,1)), to(rgba(255,255,255,0)));
+  background: -moz-linear-gradient(-90deg, rgba(255,255,255,1) 70%, rgba(255,255,255,0));
+  z-index: 2;
+}
+
+.author{
+  padding-left: 10px;
+  min-width: 110px;
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.author{
+  font-family: Helvetica;
+  color: gray;
+  font-size: 13px;
+}
+
+.message{
+  font-family: Courier;
+  color: black;
+  font-size: 18px;
+  padding-left: 10px;
+}
+
+.avatar{
+  vertical-align: middle;
+}
+
+.subMessage{
+  width: 500px;
+  word-wrap: break-word;
+}
+
+#allPosts{
+  width: 700px;
+  margin: 0 auto;
+  text-align: left;
+  position: relative;
+  z-index: 1;
+  top: 150px;
+}
+
+td{
+  border-bottom: 1px solid rgba(0,0,0,.2);
+}
+#subheader{
+  font-size: 12px;
+  letter-spacing: 11px;
+  font-family: helvetica;
+  color: gray;
+  padding-top: 5px;
+}
+#twitter{
+  position: absolute;
+  font-family: Helvetica, Arial, 'sans serif';
+  font-size: 13px;
+  line-height: 120%;
+  width: 110px;
+  top: 180px;
+  color: gray;
+  right: 109px;
+  text-align: right;
+}
+
+#githubForm{
+  position: absolute;
+  font-family: Helvetica, Arial, 'sans serif';
+  font-size: 15px;
+  line-height: 120%;
+  width: 130px;
+  top: 155px;
+  color: gray;
+  right: 109px;
+  text-align: right;
+}
+
+.field{
+  height: 25px; width: 100%;
+  font-size: 15px;
+  border: 3px #b0bac9 solid;
+  border-radius: 5px;
+  color: #7385a0;
+}
+
+a{
+  text-decoration: none;
+  color: #4E688A;
+}
+
+a:hover{
+  color: #5F87A7;
+}
+
+a.commit{
+  color: #3C3D3C;
+}
+a.commit:hover{
+  color: black;
+  text-decoration: underline;
+}
+
+.post:hover{
+  background: #EDF1EE;
+}
+
+.date{
+  font-family: Helvetica, Arial, 'sans serif';
+  font-size: 12px;
+  color: gray;
+  display: block;
+}
