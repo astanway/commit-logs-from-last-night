@@ -63,7 +63,7 @@ for line in decompressedFile:
                 
                 #search for the line in the commit message with the curse word
                 for l in c['message'].split('\n'):
-                    if any(w in l for w in word_list):
+                    if len(l) <= 50 and any(w in l for w in word_list):
 
                         #the shortened hash for the current cursed commit
                         sha = c['sha'][:10] 
