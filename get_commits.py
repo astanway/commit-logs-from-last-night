@@ -44,8 +44,6 @@ def tweet_commit(tweet): #a placeholder for the full tweet until tested
     # # print "%s Citibikes are available in %s active docks, %s in Manhattan, %s in Brooklyn, and %s in Queens" % ("{:,.0f}".format(avail_bikes_sum),"{:,.0f}".format(totalDocks_sum),"{:,.0f}".format(boro_dict['Manhattan']),"{:,.0f}".format(boro_dict['Brooklyn']),"{:,.0f}".format(boro_dict['Queens']))
     # return
 
-
-
 decompressedFile = get_file() #get the file for the previous hour
 
 clist = [] #list of commits with curse words and compare link ready to be tweeted
