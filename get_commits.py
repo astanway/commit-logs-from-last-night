@@ -70,4 +70,5 @@ for line in decompressedFile:
                         clist.append(l + ' ' + link % (before,sha))
 
 #randomly select commit and tweet
+#check tweet length before posting. Generate new random if too long
 tweet_commit(clist[random.randint(0,len(clist)-1)])
