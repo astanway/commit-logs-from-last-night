@@ -37,11 +37,12 @@ def tweet_commit(tweet): #a placeholder for the full tweet until tested
     # ACCESS_TOKEN_SECRET = keys['access_token_secret']
     # twitter = twython.Twython(CONSUMER_KEY,CONSUMER_SECRET,ACCESS_TOKEN,ACCESS_TOKEN_SECRET)
     # #######
+    
     # try:
-    #     twitter.update_status(status=status_text)
+    #     twitter.update_status(status=tweet)
     # except:
     #     pass
-    # # print "%s Citibikes are available in %s active docks, %s in Manhattan, %s in Brooklyn, and %s in Queens" % ("{:,.0f}".format(avail_bikes_sum),"{:,.0f}".format(totalDocks_sum),"{:,.0f}".format(boro_dict['Manhattan']),"{:,.0f}".format(boro_dict['Brooklyn']),"{:,.0f}".format(boro_dict['Queens']))
+
     # return
 
 decompressedFile = get_file() #get the file for the previous hour
