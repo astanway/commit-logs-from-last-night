@@ -16,7 +16,7 @@ from word_list import word_list #list of curse words to look for
 from keys import keys
 
 def get_file_url(): #calculate the file name from the current data minus one hour
-    d = datetime.datetime.now() - datetime.timedelta(hours=1)
+    d = datetime.datetime.now() - datetime.timedelta(hours=5)
     return 'http://data.githubarchive.org/%s.json.gz' % d.strftime('%Y-%m-%d-%H')
 
 def get_file(): #kick off the file getting and unzipping
