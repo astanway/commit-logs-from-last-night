@@ -67,6 +67,7 @@ for line in decompressedFile:
                 
                 #search for the line in the commit message with the curse word
                 for l in c['message'].split('\n'):
+                    #limit length of commit message (prefer short and saucy)
                     if len(l) <= 50 and any(w in l for w in word_list):
 
                         #the shortened hash for the current cursed commit
@@ -74,5 +75,4 @@ for line in decompressedFile:
                         clist.append(l + ' ' + link % (before,sha))
 
 #randomly select commit and tweet
-#check tweet length before posting. Generate new random if too long
 tweet_commit(clist[random.randint(0,len(clist)-1)])
