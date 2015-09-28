@@ -11,6 +11,7 @@ import datetime
 import json
 import random
 import twython
+import sys
 
 from word_list import word_list #list of curse words to look for
 from keys import keys
@@ -24,7 +25,11 @@ def get_file_url(): #calculate the file name from the current data minus one hou
 
 def get_file(): #kick off the file getting and unzipping
     url = get_file_url()
-    r = urllib2.urlopen(url)
+    try:
+        r = urllib2.urlopen(url)
+    except:
+        print "Error with url: " + url
+        sys.exit()
     compressedFile = StringIO.StringIO()
     compressedFile.write(r.read())
     compressedFile.seek(0)
