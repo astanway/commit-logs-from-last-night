@@ -25,7 +25,7 @@ def get_file_url(): #calculate the file name from the current data minus one hou
 
 def get_file(): #kick off the file getting and unzipping
     url = get_file_url()
-    try:
+    try: #added to fix url error with ec2. May need to change to while to wait for file to post
         r = urllib2.urlopen(url)
     except:
         print "Error with url: " + url
@@ -34,6 +34,32 @@ def get_file(): #kick off the file getting and unzipping
     compressedFile.write(r.read())
     compressedFile.seek(0)
     return gzip.GzipFile(fileobj=compressedFile, mode='rb')
+
+#a function to take in the decompressed file and output a list of matching commits formatted to tweet
+def get_clist(input_file): 
+    #loop to search for commit messages with curse words and append to clist
+    clist = []
+    for line in input_file:
+        jline = json.loads(line)
+        if jline['public'] and 'payload' in jline.keys() and 'commits' in jline['payload'].keys():
+            for c in jline['payload']['commits']:
+                if any(word in c['message'] for word in word_list):
+
+                    # the url for the compare
+                    link = 'https://github.com/' + jline['repo']['name'] + "/compare/%s...%s"
+                    
+                    #the shortened hash for previous commit to the cursed one
+                    before = jline['payload']['before'][:10] 
+                    
+                    #search for the line in the commit message with the curse word
+                    for l in c['message'].split('\n'):
+                        #limit length of commit message (prefer short and saucy)
+                        if len(l) <= 50 and any(w in l for w in word_list):
+
+                            #the shortened hash for the current cursed commit
+                            sha = c['sha'][:10] 
+                            clist.append(l + ' ' + link % (before,sha))
+    return clist
 
 def tweet_commit(tweet): #a placeholder for the full tweet until tested
     print tweet
@@ -55,29 +81,7 @@ def tweet_commit(tweet): #a placeholder for the full tweet until tested
 
 decompressedFile = get_file() #get the file for the previous hour
 
-clist = [] #list of commits with curse words and compare link ready to be tweeted
-
-#loop to search for commit messages with curse words and append to clist
-for line in decompressedFile:
-    jline = json.loads(line)
-    if jline['public'] and 'payload' in jline.keys() and 'commits' in jline['payload'].keys():
-        for c in jline['payload']['commits']:
-            if any(word in c['message'] for word in word_list):
-
-                # the url for the compare
-                link = 'https://github.com/' + jline['repo']['name'] + "/compare/%s...%s"
-                
-                #the shortened hash for previous commit to the cursed one
-                before = jline['payload']['before'][:10] 
-                
-                #search for the line in the commit message with the curse word
-                for l in c['message'].split('\n'):
-                    #limit length of commit message (prefer short and saucy)
-                    if len(l) <= 50 and any(w in l for w in word_list):
-
-                        #the shortened hash for the current cursed commit
-                        sha = c['sha'][:10] 
-                        clist.append(l + ' ' + link % (before,sha))
+clist = get_clist(decompressedFile) #list of commits with curse words and compare link ready to be tweeted
 
 #randomly select commit and tweet
 tweet_commit(clist[random.randint(0,len(clist)-1)])
