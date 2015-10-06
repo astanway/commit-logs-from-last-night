@@ -47,6 +47,8 @@ def get_clist(input_file):
                 if any(word in c['message'] for word in word_list):
 
                     avatar_url = jline['actor']['avatar_url'] #url to author avatar
+                    author_username = jline['actor']['login'] #github user name
+                    author_url = requests.get(jline['actor']['url']).json()['html_url'] #a nasty bit of method chaining to get the author user url from the api link included in the commit message
 
                     commit_time = dateutil.parser.parse(jline['created_at']) #a datatime object
 
