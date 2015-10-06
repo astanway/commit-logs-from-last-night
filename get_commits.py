@@ -12,6 +12,7 @@ import json
 import random
 import twython #will probably need to install
 import sys
+import dateutil
 
 from word_list import word_list #list of curse words to look for
 from keys import keys
@@ -44,6 +45,10 @@ def get_clist(input_file):
         if jline['public'] and 'payload' in jline.keys() and 'commits' in jline['payload'].keys():
             for c in jline['payload']['commits']:
                 if any(word in c['message'] for word in word_list):
+
+                    avatar_url = jline['actor']['avatar_url'] #url to author avatar
+
+                    commit_time = dateutil.parser.parse(jline['created_at']) #a datatime object
 
                     # the url for the compare
                     link = 'https://github.com/' + jline['repo']['name'] + "/compare/%s...%s"
