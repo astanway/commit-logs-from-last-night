@@ -10,7 +10,7 @@ import gzip
 import datetime
 import json
 import random
-import twython
+import twython #will probably need to install
 import sys
 
 from word_list import word_list #list of curse words to look for
