@@ -13,6 +13,7 @@ import random
 import twython #will probably need to install
 import sys
 import dateutil
+import collections
 
 from word_list import word_list #list of curse words to look for
 from keys import keys
@@ -45,12 +46,13 @@ def get_clist(input_file):
         if jline['public'] and 'payload' in jline.keys() and 'commits' in jline['payload'].keys():
             for c in jline['payload']['commits']:
                 if any(word in c['message'] for word in word_list):
+                    commit_dict = collections.defaultdict(str)
 
-                    avatar_url = jline['actor']['avatar_url'] #url to author avatar
-                    author_username = jline['actor']['login'] #github user name
-                    author_url = requests.get(jline['actor']['url']).json()['html_url'] #a nasty bit of method chaining to get the author user url from the api link included in the commit message
+                    commit_dict['avatar_url'] = jline['actor']['avatar_url'] #url to author avatar
+                    commit_dict['author_username'] = jline['actor']['login'] #github user name
+                    commit_dict['author_url'] = requests.get(jline['actor']['url']).json()['html_url'] #a nasty bit of method chaining to get the author user url from the api link included in the commit message
 
-                    commit_time = dateutil.parser.parse(jline['created_at']) #a datatime object
+                    commit_dict['commit_time'] = dateutil.parser.parse(jline['created_at']) #a datatime object
 
                     # the url for the compare
                     link = 'https://github.com/' + jline['repo']['name'] + "/compare/%s...%s"
@@ -65,7 +67,10 @@ def get_clist(input_file):
 
                             #the shortened hash for the current cursed commit
                             sha = c['sha'][:10] 
-                            clist.append(l + ' ' + link % (before,sha))
+                            commit_dict['message'] = l
+                            commit_dict['link'] = link % (before,sha)
+
+                            clist.append(commit_dict)
     return clist
 
 def tweet_commit(tweet): #a placeholder for the full tweet until tested
