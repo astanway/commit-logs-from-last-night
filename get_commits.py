@@ -31,7 +31,8 @@ def get_file(): #kick off the file getting and unzipping
         r = urllib2.urlopen(url)
     except:
         print "Error with url: " + url
-        sys.exit()
+        # sys.exit()
+        pass
     compressedFile = StringIO.StringIO()
     compressedFile.write(r.read())
     compressedFile.seek(0)
