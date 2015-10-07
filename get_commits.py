@@ -14,18 +14,35 @@ import twython #will probably need to install
 import sys
 import dateutil
 import collections
+# import requests
+import dateutil.parser
 
 from word_list import word_list #list of curse words to look for
 from keys import keys
 
-def get_file_url(): #calculate the file name from the current data minus one hour
-    d = datetime.datetime.now() - datetime.timedelta(hours=1)
+# def get_24hour_dates():
+#     now = datetime.datetime.now()
+#     last_day = datetime.datetime.now() - datetime.timedelta(hours=24)
+#     for dt in rrule.rrule(rrule.HOURLY,dtstart=last_day,until=now):
+
+#Based on http://stackoverflow.com/questions/153584/how-to-iterate-over-a-timespan-after-days-hours-weeks-and-months-in-python
+def datespan(startDate, endDate, delta=datetime.timedelta(hours=1)):
+    currentDate = startDate
+    while currentDate < endDate:
+        yield currentDate
+        currentDate += delta
+
+def get_file_url(d): #return file name based on passed in datetime object
     d_string = d.strftime('%Y-%m-%d')
     #trimming leading hour off of hour because apparently this isn't something we do in Python
     hour = d.strftime('%H') if d.strftime('%H')[0] != '0' else d.strftime('%H')[1:]
     return 'http://data.githubarchive.org/%s-%s.json.gz' % (d_string,hour)
 
 def get_file(): #kick off the file getting and unzipping
+    commit_list = []
+    now = datetime.datetime.now()
+    last_day = datetime.datetime.now() - datetime.timedelta(hours=24)
+
     url = get_file_url()
     try: #added to fix url error with ec2. May need to change to while to wait for file to post
         r = urllib2.urlopen(url)
@@ -51,10 +68,11 @@ def get_clist(input_file):
 
                     commit_dict['avatar_url'] = jline['actor']['avatar_url'] #url to author avatar
                     commit_dict['author_username'] = jline['actor']['login'] #github user name
-                    commit_dict['author_url'] = requests.get(jline['actor']['url']).json()['html_url'] #a nasty bit of method chaining to get the author user url from the api link included in the commit message
-
                     commit_dict['commit_time'] = dateutil.parser.parse(jline['created_at']) #a datatime object
 
+                    #this is a hack so we don't have to authenticate with Github to get the user page, which should be this url
+                    commit_dict['author_url'] = "https://github.com/" + jline['actor']['login'] 
+                    
                     # the url for the compare
                     link = 'https://github.com/' + jline['repo']['name'] + "/compare/%s...%s"
                     
