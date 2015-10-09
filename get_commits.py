@@ -20,11 +20,6 @@ import dateutil.parser
 from word_list import word_list #list of curse words to look for
 from keys import keys
 
-# def get_24hour_dates():
-#     now = datetime.datetime.now()
-#     last_day = datetime.datetime.now() - datetime.timedelta(hours=24)
-#     for dt in rrule.rrule(rrule.HOURLY,dtstart=last_day,until=now):
-
 #Based on http://stackoverflow.com/questions/153584/how-to-iterate-over-a-timespan-after-days-hours-weeks-and-months-in-python
 def datespan(startDate, endDate, delta=datetime.timedelta(hours=1)):
     currentDate = startDate
@@ -37,23 +32,6 @@ def get_file_url(d): #return file name based on passed in datetime object
     #trimming leading hour off of hour because apparently this isn't something we do in Python
     hour = d.strftime('%H') if d.strftime('%H')[0] != '0' else d.strftime('%H')[1:]
     return 'http://data.githubarchive.org/%s-%s.json.gz' % (d_string,hour)
-
-def get_file(): #kick off the file getting and unzipping
-    commit_list = []
-    now = datetime.datetime.now()
-    last_day = datetime.datetime.now() - datetime.timedelta(hours=24)
-
-    url = get_file_url()
-    try: #added to fix url error with ec2. May need to change to while to wait for file to post
-        r = urllib2.urlopen(url)
-    except:
-        print "Error with url: " + url
-        # sys.exit()
-        pass
-    compressedFile = StringIO.StringIO()
-    compressedFile.write(r.read())
-    compressedFile.seek(0)
-    return gzip.GzipFile(fileobj=compressedFile, mode='rb')
 
 #a function to take in the decompressed file and output a list of matching commits formatted to tweet
 def get_clist(input_file): 
@@ -110,9 +88,21 @@ def tweet_commit(tweet): #a placeholder for the full tweet until tested
 
     # return
 
-decompressedFile = get_file() #get the file for the previous hour
-
-clist = get_clist(decompressedFile) #list of commits with curse words and compare link ready to be tweeted
+commit_list = []
+now = datetime.datetime.now()
+last_day = datetime.datetime.now() - datetime.timedelta(hours=24)
+for d in datespan(last_day,now): #pass value instead of function to keep it from returning current hour
+    try:
+        url = get_file_url(d)
+        r = urllib2.urlopen(url)
+        compressedFile = StringIO.StringIO()
+        compressedFile.write(r.read())
+        compressedFile.seek(0)
+        decompressedFile = gzip.GzipFile(fileobj=compressedFile, mode='rb')
+        commit_list += get_clist(decompressedFile)
+    except:
+        "Error with url: " + url
+        pass
 
 #randomly select commit and tweet
-tweet_commit(clist[random.randint(0,len(clist)-1)])
+tweet_commit(commit_list[random.randint(0,len(commit_list)-1)])
