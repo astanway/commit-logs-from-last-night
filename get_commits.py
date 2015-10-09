@@ -10,15 +10,21 @@ import gzip
 import datetime
 import json
 import random
-import twython #will probably need to install
+# import twython #will probably need to install
 import sys
 import dateutil
 import collections
-# import requests
 import dateutil.parser
 
+# from original scrape.py
+import MySQLdb
+import dbauth
+from twitter_auth import token, token_secret, consumer, consumer_secret
+from twitter import Twitter, OAuth #should this be OAuth2?
+
+
 from word_list import word_list #list of curse words to look for
-from keys import keys
+
 
 #Based on http://stackoverflow.com/questions/153584/how-to-iterate-over-a-timespan-after-days-hours-weeks-and-months-in-python
 def datespan(startDate, endDate, delta=datetime.timedelta(hours=1)):
@@ -35,6 +41,16 @@ def get_file_url(d): #return file name based on passed in datetime object
 
 #a function to take in the decompressed file and output a list of matching commits formatted to tweet
 def get_clist(input_file): 
+    '''
+    A function to take the input file, search for commits with words in the word list, and create 
+    a dictionary of the information for those commits.
+    'avatar_url' -> the url for the author's avatar
+    'author_username' -> the author username
+    'commit_time' -> the time of the commit 
+    'author_url' -> the url for the author's Github page
+    'message' -> the line in the commit message with the curse word
+    'link' -> the link for the compare and the commit message
+    '''
     #loop to search for commit messages with curse words and append to clist
     clist = []
     for line in input_file:
@@ -70,39 +86,52 @@ def get_clist(input_file):
                             clist.append(commit_dict)
     return clist
 
-def tweet_commit(tweet): #a placeholder for the full tweet until tested
-    print tweet
-
-    # #####authenticate the Twitter account
-    # CONSUMER_KEY = keys['consumer_key']
-    # CONSUMER_SECRET = keys['consumer_secret']
-    # ACCESS_TOKEN = keys['access_token']
-    # ACCESS_TOKEN_SECRET = keys['access_token_secret']
-    # twitter = twython.Twython(CONSUMER_KEY,CONSUMER_SECRET,ACCESS_TOKEN,ACCESS_TOKEN_SECRET)
-    # #######
-    
-    # try:
-    #     twitter.update_status(status=tweet)
-    # except:
-    #     pass
-
-    # return
-
-commit_list = []
-now = datetime.datetime.now()
-last_day = datetime.datetime.now() - datetime.timedelta(hours=24)
-for d in datespan(last_day,now): #pass value instead of function to keep it from returning current hour
+def process(message):
+    '''
+    A function to commit the selected message to the database. The message is a dictionary of the randomly selected commit.
+    This loads the commit into the database
+    '''
     try:
-        url = get_file_url(d)
-        r = urllib2.urlopen(url)
-        compressedFile = StringIO.StringIO()
-        compressedFile.write(r.read())
-        compressedFile.seek(0)
-        decompressedFile = gzip.GzipFile(fileobj=compressedFile, mode='rb')
-        commit_list += get_clist(decompressedFile)
+        cursor = dbauth.db.cursor()
+        userurl = message['author_url']
+        avatar = message['avatar_url']
+        created_at = dbauth.db.escape_string(message['created_at'].strftime('%Y-%m-%d %H:%M:%S'))
+        query = "INSERT INTO new_commits VALUES ('', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', '')" % (message['author_username'], dbauth.db.escape_string(message['message']), avatar, dbauth.db.escape_string(message['message']), dbauth.db.escape_string(userurl), created_at)
+        cursor.execute(query)
+        tweet_commit(message['message'],message['link'])
+    except Exception as e:
+        print e
+        continue
+
+
+def tweet_commit(message, link): # a sketch of the tweet function that should be tested with real keys
+    t = Twitter(
+        auth=OAuth(token, token_secret, consumer, consumer_secret))
+    try:
+        t.statuses.update(status= message + ' ' + link) 
     except:
-        "Error with url: " + url
         pass
 
-#randomly select commit and tweet
-tweet_commit(commit_list[random.randint(0,len(commit_list)-1)])
+
+def main():
+    commit_list = []
+    now = datetime.datetime.now()
+    last_day = datetime.datetime.now() - datetime.timedelta(hours=24)
+    for d in datespan(last_day,now): #pass value instead of function to keep it from returning current hour
+        try:
+            url = get_file_url(d)
+            r = urllib2.urlopen(url)
+            compressedFile = StringIO.StringIO()
+            compressedFile.write(r.read())
+            compressedFile.seek(0)
+            decompressedFile = gzip.GzipFile(fileobj=compressedFile, mode='rb')
+            commit_list += get_clist(decompressedFile)
+        except:
+            "Error with url: " + url
+            pass
+
+    #randomly select commit and tweet
+    tweet_commit(commit_list[random.randint(0,len(commit_list)-1)])
+
+if __name__ == "__main__":
+    main()
