@@ -38,9 +38,9 @@ if($next_page > $num_pages){
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Marvel:700italic' rel='stylesheet' type='text/css'>
-  <link href='styles.css' rel='stylesheet' type='text/css'>
+  <link href='css/styles.css' rel='stylesheet' type='text/css'>
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  <script type="text/javascript" src="jquery.infinitescroll.min.js"></script>
+  <script type="text/javascript" src="js/jquery.infinitescroll.min.js"></script>
   <script type="text/javascript">
     $(document).ready(function(){
       $('#allPosts').infinitescroll({
@@ -64,7 +64,7 @@ Created by <a href="http://www.twitter.com/abestanway">@abestanway</a>
 </br></br>
 Watch the <a href="http://bit.ly/19XjyNb">video</a>!
 <br><br>
-<a href="http://hired.com/?utm_source=partner&utm_medium=abes"><img src="hired.png"></a>
+<!-- <a href="http://hired.com/?utm_source=partner&utm_medium=abes"><img src="hired.png"></a> -->
 </div>
    </div>
 
