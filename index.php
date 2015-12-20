@@ -64,7 +64,7 @@ Created by <a href="http://www.twitter.com/abestanway">@abestanway</a>
 </br></br>
 Watch the <a href="http://bit.ly/19XjyNb">video</a>!
 <br><br>
-<a href="http://hired.com/?utm_source=partner&utm_medium=abes"><img src="hired.png"></a>
+<!-- <a href="http://hired.com/?utm_source=partner&utm_medium=abes"><img src="hired.png"></a> -->
 </div>
    </div>
 

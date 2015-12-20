@@ -19,8 +19,8 @@ import dateutil.parser
 # from original scrape.py
 import MySQLdb
 import dbauth
-from twitter_auth import token, token_secret, consumer, consumer_secret
-from twitter import Twitter, OAuth #should this be OAuth2?
+# from twitter_auth import token, token_secret, consumer, consumer_secret
+# from twitter import Twitter, OAuth #should this be OAuth2?
 
 
 from word_list import word_list #list of curse words to look for
@@ -95,22 +95,11 @@ def process(message):
         cursor = dbauth.db.cursor()
         userurl = message['author_url']
         avatar = message['avatar_url']
-        created_at = dbauth.db.escape_string(message['created_at'].strftime('%Y-%m-%d %H:%M:%S'))
+        created_at = dbauth.db.escape_string(dateutil.parser.parse(message['created_at']).strftime('%Y-%m-%d %H:%M:%S'))
         query = "INSERT INTO new_commits VALUES ('', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', '')" % (message['author_username'], dbauth.db.escape_string(message['message']), avatar, dbauth.db.escape_string(message['message']), dbauth.db.escape_string(userurl), created_at)
         cursor.execute(query)
-        tweet_commit(message['message'],message['link'])
     except Exception as e:
         print e
-        continue
-
-
-def tweet_commit(message, link): # a sketch of the tweet function that should be tested with real keys
-    t = Twitter(
-        auth=OAuth(token, token_secret, consumer, consumer_secret))
-    try:
-        t.statuses.update(status= message + ' ' + link) 
-    except:
-        pass
 
 
 def main():
@@ -130,8 +119,8 @@ def main():
             "Error with url: " + url
             pass
 
-    #randomly select commit and tweet
-    tweet_commit(commit_list[random.randint(0,len(commit_list)-1)])
+    for commit in commit_list:
+        process(commit)
 
 if __name__ == "__main__":
     main()
