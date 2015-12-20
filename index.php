@@ -90,7 +90,7 @@ Watch the <a href="http://bit.ly/19XjyNb">video</a>!
         <td valign="middle" class="message">
 
           <div class="subMessage">
-                <?php echo '<a class="commit" target="_blank" href='. $row['commiturl'] . '>' . $row['message'] .'</a>'?>  
+                <?php echo '<a class="commit" target="_blank" href='. $row['commiturl'] . ' > ' . $row['message'] .'</a>'?>  
           </div>
         </td>
       </tr> 

@@ -60,30 +60,19 @@ def get_clist(input_file):
                 if any(word in c['message'] for word in word_list):
                     commit_dict = collections.defaultdict(str)
 
+                    commit_dict['message'] = c['message']
+
                     commit_dict['avatar_url'] = jline['actor']['avatar_url'] #url to author avatar
                     commit_dict['author_username'] = jline['actor']['login'] #github user name
                     commit_dict['commit_time'] = dateutil.parser.parse(jline['created_at']) #a datatime object
 
                     #this is a hack so we don't have to authenticate with Github to get the user page, which should be this url
                     commit_dict['author_url'] = "https://github.com/" + jline['actor']['login'] 
-                    
+
                     # the url for the compare
-                    link = 'https://github.com/' + jline['repo']['name'] + "/compare/%s...%s"
-                    
-                    #the shortened hash for previous commit to the cursed one
-                    before = jline['payload']['before'][:10] 
-                    
-                    #search for the line in the commit message with the curse word
-                    for l in c['message'].split('\n'):
-                        #limit length of commit message (prefer short and saucy)
-                        if len(l) <= 50 and any(w in l for w in word_list):
+                    commit_dict['commiturl'] = 'https://github.com/' + jline['repo']['name'] + "/commit/" + c['sha']
+                    clist.append(commit_dict)
 
-                            #the shortened hash for the current cursed commit
-                            sha = c['sha'][:10] 
-                            commit_dict['message'] = l
-                            commit_dict['link'] = link % (before,sha)
-
-                            clist.append(commit_dict)
     return clist
 
 def process(message):
@@ -96,7 +85,7 @@ def process(message):
         userurl = message['author_url']
         avatar = message['avatar_url']
         created_at = dbauth.db.escape_string(message['commit_time'].strftime('%Y-%m-%d %H:%M:%S'))
-        query = "INSERT INTO new_commits VALUES ('', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', '')" % (message['author_username'], dbauth.db.escape_string(message['message']), avatar, dbauth.db.escape_string(message['message']), dbauth.db.escape_string(userurl), created_at)
+        query = "INSERT INTO new_commits VALUES ('', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', '')" % (dbauth.db.escape_string(message['author_username']), dbauth.db.escape_string(message['message']), avatar, dbauth.db.escape_string(message['commiturl']), dbauth.db.escape_string(userurl), created_at)
         cursor.execute(query)
     except Exception as e:
         print e
@@ -104,7 +93,7 @@ def process(message):
 
 def main():
     now = datetime.datetime.now()
-    last_day = datetime.datetime.now() - datetime.timedelta(hours=24)
+    last_day = datetime.datetime.now() - datetime.timedelta(hours=1000)
     for d in datespan(last_day,now): #pass value instead of function to keep it from returning current hour
         try:
             url = get_file_url(d)
