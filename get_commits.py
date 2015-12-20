@@ -95,7 +95,7 @@ def process(message):
         cursor = dbauth.db.cursor()
         userurl = message['author_url']
         avatar = message['avatar_url']
-        created_at = dbauth.db.escape_string(dateutil.parser.parse(message['created_at']).strftime('%Y-%m-%d %H:%M:%S'))
+        created_at = dbauth.db.escape_string(message['commit_time'].strftime('%Y-%m-%d %H:%M:%S'))
         query = "INSERT INTO new_commits VALUES ('', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', '')" % (message['author_username'], dbauth.db.escape_string(message['message']), avatar, dbauth.db.escape_string(message['message']), dbauth.db.escape_string(userurl), created_at)
         cursor.execute(query)
     except Exception as e:
@@ -103,7 +103,6 @@ def process(message):
 
 
 def main():
-    commit_list = []
     now = datetime.datetime.now()
     last_day = datetime.datetime.now() - datetime.timedelta(hours=24)
     for d in datespan(last_day,now): #pass value instead of function to keep it from returning current hour
@@ -114,13 +113,12 @@ def main():
             compressedFile.write(r.read())
             compressedFile.seek(0)
             decompressedFile = gzip.GzipFile(fileobj=compressedFile, mode='rb')
-            commit_list += get_clist(decompressedFile)
+            for commit in get_clist(decompressedFile):
+                process(commit)
         except:
             "Error with url: " + url
             pass
 
-    for commit in commit_list:
-        process(commit)
 
 if __name__ == "__main__":
     main()

@@ -64,7 +64,7 @@ Created by <a href="http://www.twitter.com/abestanway">@abestanway</a>
 </br></br>
 Watch the <a href="http://bit.ly/19XjyNb">video</a>!
 <br><br>
-<!-- <a href="http://hired.com/?utm_source=partner&utm_medium=abes"><img src="hired.png"></a> -->
+<a href="http://hired.com/?utm_source=partner&utm_medium=abes"><img src="hired.png"></a>
 </div>
    </div>
 
@@ -81,12 +81,14 @@ Watch the <a href="http://bit.ly/19XjyNb">video</a>!
           </a>
         </td>
         <td valign="middle" class="author">
+                <?php echo '<div class="commiter">' . $row['commiter'] . " </div><br>" ;?> 
                 <?php $datetime = strtotime($row['date']);
                       $mysqldate = date("m/d/y g:i A", $datetime);
                       echo "<span class='date'>". $mysqldate . "</span>";
                  ?>
         </td>
         <td valign="middle" class="message">
+
           <div class="subMessage">
                 <?php echo '<a class="commit" target="_blank" href='. $row['commiturl'] . '>' . $row['message'] .'</a>'?>  
           </div>
