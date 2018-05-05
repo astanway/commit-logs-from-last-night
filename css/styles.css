@@ -76,13 +76,13 @@ html, body, #header{
 }
 
 .author{
-  font-family: Helvetica;
+  font-family: Helvetica, sans-serif;
   color: gray;
   font-size: 13px;
 }
 
 .message{
-  font-family: Courier;
+  font-family: monospace;
   color: black;
   font-size: 18px;
   padding-left: 10px;
@@ -112,13 +112,13 @@ td{
 #subheader{
   font-size: 12px;
   letter-spacing: 11px;
-  font-family: helvetica;
+  font-family: helvetica, sans-serif;
   color: gray;
   padding-top: 5px;
 }
 #twitter{
   position: absolute;
-  font-family: Helvetica, Arial, 'sans serif';
+  font-family: Helvetica, Arial, sans-serif;
   font-size: 13px;
   line-height: 120%;
   width: 110px;
@@ -130,7 +130,7 @@ td{
 
 #githubForm{
   position: absolute;
-  font-family: Helvetica, Arial, 'sans serif';
+  font-family: Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 120%;
   width: 130px;
@@ -176,7 +176,7 @@ a.commit:hover{
 }
 
 .date{
-  font-family: Helvetica, Arial, 'sans serif';
+  font-family: Helvetica, Arial, sans-serif;
   font-size: 12px;
   color: gray;
   display: block;
