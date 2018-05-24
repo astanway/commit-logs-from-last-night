@@ -34,8 +34,11 @@ if($next_page > $num_pages){
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Learn how to use the Firebase platform on the Web">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Commit Logs From Last Night</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Marvel:700italic' rel='stylesheet' type='text/css'>
   <link href='css/styles.css' rel='stylesheet' type='text/css'>
