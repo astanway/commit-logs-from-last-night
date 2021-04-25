@@ -40,7 +40,7 @@ def get_file_url(d): #return file name based on passed in datetime object
     return 'http://data.githubarchive.org/%s-%s.json.gz' % (d_string,hour)
 
 #a function to take in the decompressed file and output a list of matching commits formatted to tweet
-def get_clist(input_file): 
+def get_clist(input_file):
     '''
     A function to take the input file, search for commits with words in the word list, and create 
     a dictionary of the information for those commits.
@@ -67,7 +67,7 @@ def get_clist(input_file):
                     commit_dict['commit_time'] = dateutil.parser.parse(jline['created_at']) #a datatime object
 
                     #this is a hack so we don't have to authenticate with Github to get the user page, which should be this url
-                    commit_dict['author_url'] = "https://github.com/" + jline['actor']['login'] 
+                    commit_dict['author_url'] = "https://github.com/" + jline['actor']['login']
 
                     # the url for the compare
                     commit_dict['commiturl'] = 'https://github.com/' + jline['repo']['name'] + "/commit/" + c['sha']
